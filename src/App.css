@@ -1,5 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input{
+  border-radius: 8px;
+  padding-left: 4px;
+}
+
+h1{
+  font-size: 22px;
+  font-weight: bold;
+  padding: 2px;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-logo {
@@ -35,4 +54,32 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.mapDiv{
+  height:700px;
+  width: 800px;
+}
+
+.mapNavigation{
+  display: flex;
+  align-items: center;
+  background-color: antiquewhite;
+  padding: 20px;
+}
+
+.button{
+  width: 100%;
+  background-color: #fbae1f;
+  border:1px solid rebeccapurple;
+  border-radius:8px;
+  padding: 4px;
+}
+
+.routeData:before {
+    content:"• ";
+}
+
+.disabled{
+  color: gray;
 }
