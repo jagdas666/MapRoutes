@@ -7,6 +7,17 @@ input{
   padding-left: 4px;
 }
 
+button{
+  width: 100%;
+  background-color: #fbae1f;
+  border:1px solid rebeccapurple;
+  border-radius:8px;
+  padding: 4px;
+}
+button:hover{
+    background-color: wheat;
+}
+
 h1{
   font-size: 22px;
   font-weight: bold;
@@ -63,9 +74,10 @@ h1{
 
 .mapNavigation{
   display: flex;
-  align-items: center;
   background-color: antiquewhite;
   padding: 20px;
+  width: 100%;
+  height: 60vw;
 }
 
 .button{
@@ -82,4 +94,68 @@ h1{
 
 .disabled{
   color: gray;
+}
+
+.tab {
+  display: flex;
+  width: 100%;
+  padding: 4px;
+  gap:8px
+}
+
+.tab button {
+  background-color: white;
+  float: left;
+  border: 1px solid;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.tab button:hover {
+  background-color: #fbae1f;
+}
+
+.tab button.active {
+  background-color: #fbae1f;
+}
+
+ .marker-icon {
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #FF0000;
+  }
+
+  .marker-disabled-icon {
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: black;
+  }
+
+ .marker-tooltip {
+        display: none;
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+       color: #333;
+        background-color: #fff;
+        font-size: 20px;
+        padding: 8px;
+        border-radius: 8px;
+        white-space: nowrap;
+        z-index: 10;
+    }
+    
+.marker-icon:hover .marker-tooltip,
+.marker-disabled-icon:hover .marker-tooltip {
+    display: block;
 }

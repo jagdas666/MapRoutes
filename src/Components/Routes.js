@@ -2,10 +2,14 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import './map.css'
 import Stops from './Stops'
-const Routes = ({map,markLocation,onSubmit,routeData}) => {
+import { ROUTE_STATUS } from '../constant'
+
+
+const Routes = ({onSubmit,routeData}) => {
+
 const [routeName,setRouteName]=useState();
 const [routeDirection,setRouteDirection]=useState('UP')
-const [routeStatus,setRouteStatus]=useState('Active')
+const [routeStatus,setRouteStatus]=useState(ROUTE_STATUS.ACTIVE)
 const [routeId,setRouteId]=useState();
 
 const initialStopData =
@@ -21,7 +25,6 @@ const initialStopData =
 
 const [stopsData,setStopsData]=useState([initialStopData]);
   
-
 useEffect(()=>{
   if(routeData){
     const {routeDirection,routeId,routeName,routeStatus,stops}=routeData;
@@ -37,29 +40,41 @@ const onRouteNameChange=(e)=>setRouteName(e.target.value);
 const onRouteIdChange=(e)=>setRouteId(e.target.value);
 const onRouteStatusChange=(e)=>setRouteStatus(e.target.value);
 const onRouteDirectionChange=(e)=>setRouteDirection(e.target.value)
+
 const onRouteStopsDataChange=(id,data)=>{
-    console.log("clicer",id,data,stopsData)
     const newStopVal=stopsData.map((item)=>{
         if(item.id===id) return {...item,...data};
         return item;
     })
-    console.log("new",newStopVal)
     setStopsData(newStopVal)
 }
 
 const removeStops=(id)=>{
     const newval=stopsData.filter(item=>item.id!=id)
-    console.log("remeo",stopsData,newval)
     setStopsData(newval);
-
 }
 
 const onSubmitForm=async (event)=>{
-    console.log("formsubmit")
-          event.preventDefault();
-          event.stopPropagation();
-    const RouteData={routeName,routeDirection,routeId,routeStatus,stops:stopsData}
-   onSubmit(RouteData);
+    event.preventDefault();
+    event.stopPropagation();
+    const RouteData={routeName,routeDirection,routeId,routeStatus,stops: routeDirection==='DOWN'? reverseStopsData(stopsData) : stopsData}
+    onSubmit(RouteData);
+    setRouteName('');
+    setRouteDirection('UP');
+    setRouteId('');
+    setRouteStatus(ROUTE_STATUS.ACTIVE)
+    setStopsData([initialStopData])
+}
+
+const reverseStopsData=(stops)=>{
+   const reverseStops=stops.reverse();
+    let index=0;
+      return reverseStops.map((item)=>{
+          let id=index;
+          index++;
+          return {...item,id}
+      })
+  
 }
 
 const onClickAddStops=(event)=>{
@@ -76,7 +91,7 @@ const onClickAddStops=(event)=>{
         </label>
         <label>
           Route Direction:
-         <select id="direction" onChange={onRouteDirectionChange}>
+         <select id="direction"  value={routeDirection} onChange={onRouteDirectionChange}>
          <option value="UP">UP</option>
          <option value="DOWN">DOWN</option>
         </select>
@@ -87,7 +102,7 @@ const onClickAddStops=(event)=>{
         </label>
          <label>
           Route Status:
-         <select id="status" onChange={onRouteStatusChange}>
+         <select value={routeStatus} id="status" onChange={onRouteStatusChange}>
          <option value="Active">Active</option>
          <option value="InActive">InActive</option>
         </select>
@@ -108,11 +123,10 @@ const onClickAddStops=(event)=>{
            </div>
             </div>
           )
-
         })}
          </label>
         </div>
-        <input className='submitButton' type="submit" value="Submit" />
+        <input className='submitButton'  disabled={stopsData.length<2} type="submit" value="Submit" />
         </form>
   )
 }

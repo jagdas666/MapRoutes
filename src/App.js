@@ -1,4 +1,3 @@
-import logo from './logo.svg';
  import './App.css';
  import MapNavigation from './Components/MapNavigation'
 function App() {

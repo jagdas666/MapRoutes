@@ -1,5 +1,12 @@
-export const {
 
+export const TABS=[{label:"Add Routes",value:"ADD_ROUTES"},{label:'Edit Routes',value:"EDIT_ROUTES"}]
 
-    stops:[{value:'52.2297,21.0122'},{value:'41.3874,2.1686'},{value:'38.7223,-8.2245'},{value:'37.3891,-5.994072'}]
+export const ROUTE_STATUS={
+    ACTIVE: 'Active',
+    INACTIVE: 'InActive'
+}
+
+export const TABS_VALUE={
+    ADD_ROUTES:'ADD_ROUTES',
+    EDIT_ROUTES:'EDIT_ROUTES'
 }

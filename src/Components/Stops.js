@@ -1,10 +1,8 @@
 import React from 'react'
-import { useState } from 'react';
 import './map.css'
+
 const Stops = ({stopData,onRouteStopsDataChange}) => {
-
-
-const {id,stopId,stopName,stopIdType,stopNametype,type,value}=stopData
+const {id,stopId,stopName,stopIdType,stopNametype,type,value}= stopData
 
  const onChangeStopName=(e)=>{
     e.stopPropagation();
